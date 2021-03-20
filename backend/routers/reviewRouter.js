@@ -10,7 +10,9 @@ router.get("/:id", async (req, res) => {
   try {
     const review = await schema.Review.find({
       cafe: req.params.id,
-    }).populate("user", "displayName");
+    })
+      .sort({ date: -1 })
+      .populate("user", "displayName");
     res.send(review);
   } catch (error) {
     return await errorCatching(error);

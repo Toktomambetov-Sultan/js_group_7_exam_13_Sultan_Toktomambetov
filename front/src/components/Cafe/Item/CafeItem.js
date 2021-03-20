@@ -26,13 +26,7 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
 }));
-const CafeItem = ({
-  cafe,
-  user,
-  onRateChange,
-  onImageClick,
-  single = "",
-}) => {
+const CafeItem = ({ cafe, onImageClick, single = "" }) => {
   const classes = useStyles();
   return (
     <Grid item>
@@ -57,11 +51,10 @@ const CafeItem = ({
             </div>
           )}
           <Rating
-            readonly={!user?.token}
-            initialRating={cafe.totalRate * 5}
+            readonly={true}
+            initialRating={cafe?.rates?.total * 5}
             emptySymbol={<StarOutlineIcon />}
             fullSymbol={<StarIcon />}
-            onChange={(num) => onRateChange(num, cafe._id)}
             placeholderSymbol={<StarHalfIcon />}
           />
           <Typography variant="subtitle1">

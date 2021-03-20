@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const fs = require("fs").promises;
 const config = require("../config");
 const Schema = mongoose.Schema;
-
+const rateOption = {
+  type: Number,
+  required: true,
+  default: 0,
+};
 const Cafe = new Schema({
   user: {
     type: Schema.Types.ObjectId,
@@ -37,7 +41,21 @@ const Cafe = new Schema({
     required: true,
     default: 0,
   },
-  totalRates: {},
+  rates: {
+    type: {
+      "Quality of food": rateOption,
+      "Service quality": rateOption,
+      Interior: rateOption,
+      total: rateOption,
+    },
+    default: {
+      "Quality of food": 0,
+      "Service quality": 0,
+      Interior: 0,
+      total: 0,
+    },
+    required: true,
+  },
 });
 
 Cafe.post("findOneAndDelete", async function (doc, next) {

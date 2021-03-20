@@ -78,7 +78,7 @@ export const logOut = () => {
       const headers = {
         Authorization: getState().user.user?.token,
       };
-      await axiosOrder.post("/users//log_out", "", { headers });
+      await axiosOrder.post("/users/log_out", "", { headers });
       dispatch(setUserData(null));
       dispatch(push("/"));
       dispatch(fetchSuccess());

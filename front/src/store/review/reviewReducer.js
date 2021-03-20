@@ -9,7 +9,7 @@ const initialState = {
   reviews: [],
   currentReview: {
     rates: {
-      "Quality of foods": 0,
+      "Quality of food": 0,
       "Service quality": 0,
       Interior: 0,
     },
