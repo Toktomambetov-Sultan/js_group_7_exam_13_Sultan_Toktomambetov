@@ -8,15 +8,21 @@ const storage = multer.diskStorage({
     cb(null, config.ImageUploadingDir);
   },
   filename: function (req, file, cb) {
+    console.log("I am here");
     cb(null, nanoid() + "-" + file.originalname);
   },
 });
 
 const uploadImage = multer({
-  storage: storage,
+  storage,
   fileFilter: (req, file, callback) => {
     const ext = path.extname(file.originalname);
-    if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
+    if (
+      ext !== ".png" &&
+      ext !== ".jpg" &&
+      ext !== ".gif" &&
+      ext !== ".jpeg"
+    ) {
       return callback(null, false);
     }
     return callback(null, true);

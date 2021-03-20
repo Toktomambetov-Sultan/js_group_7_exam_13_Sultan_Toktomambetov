@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
   try {
     const cafe = await schema.Cafe.find().populate(
       "user",
-      "username"
+      "displayName"
     );
     return res.send(cafe);
   } catch (error) {
@@ -22,19 +22,17 @@ router.get("/", async (req, res) => {
 
 router.post(
   "/",
-  [
-    authorizationMiddleware(true),
-    uploadImage.single("image"),
-  ],
-  async (req, res) => {
+  uploadImage.single("image"),
+  [authorizationMiddleware(true)],
+  async (req, res, next) => {
     try {
       if (req.body.checkbox) {
-        const cafe = new schema.Photo({
+        const cafe = new schema.Cafe({
           title: req.body.title,
           user: req.user._id,
           description: req.body.description,
-          image: req.file && req.file.filename,
         });
+        if (req.file) cafe.image = req.file?.filename;
         await cafe.save();
         return res.send({
           message: "Заведение успешно зарегистрированно",

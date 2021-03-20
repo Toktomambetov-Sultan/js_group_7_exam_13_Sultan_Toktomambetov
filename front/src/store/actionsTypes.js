@@ -14,3 +14,5 @@ export const SET_USER_DATA = "SET_USER_DATA";
 
 export const SET_CURRENT_CAFE = "SET_CURRENT_CAFE";
 export const SET_CAFE_LIST = "SET_CAFE_LIST";
+export const CLEAR_CURRENT_CAFE = "CLEAR_CURRENT_CAFE";
+export const CLEAR_CAFE_LIST = "CLEAR_CAFE_LIST";

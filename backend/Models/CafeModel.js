@@ -26,6 +26,11 @@ const Cafe = new Schema({
     type: String,
     required: true,
   },
+  totalPhoto: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
 
 Cafe.post("findOneAndDelete", async function (doc, next) {

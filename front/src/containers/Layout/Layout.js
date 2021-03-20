@@ -48,30 +48,62 @@ const Layout = ({ children }) => {
   };
   return (
     <div>
-      <Backdrop className={classes.backdrop} open={state.isLoading}>
+      <Backdrop
+        className={classes.backdrop}
+        open={state.isLoading}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
       <AppBar component={Box} position="static" pb={2}>
         <Toolbar>
           <Container>
             <Grid container direction="column">
-              <Grid item container justify="space-between" alignItems="center">
-                <NavLink to="/cafe-list" exact className={classes.navLink}>
-                  <Typography variant="h4">Cafe critic</Typography>
+              <Grid
+                item
+                container
+                wrap="nowrap"
+                justify="space-between"
+                alignItems="center"
+              >
+                <NavLink
+                  to="/cafe-list"
+                  exact
+                  className={classes.navLink}
+                >
+                  <Typography variant="h4">
+                    Cafe critic
+                  </Typography>
                 </NavLink>
                 {user?.token && (
-                  <NavLink
-                    to={"/gallery/" + user?._id}
-                    exact
-                    className={classes.navLink}
-                  >
-                    <Grid container alignItems="center" direction="row">
-                      <Avatar alt="person image" src={user?.avatarImage} />
-                      <Typography className={classes.displayName} variant="h6">
+                  <div>
+                    <Grid
+                      container
+                      alignItems="center"
+                      direction="row"
+                    >
+                      <Avatar
+                        alt="person image"
+                        src={user?.avatarImage}
+                      />
+                      <Typography
+                        className={classes.displayName}
+                        variant="h6"
+                      >
                         {user?.displayName}
                       </Typography>
+                      <Box ml={3}>
+                        <NavLink
+                          to="/add-cafe"
+                          exact
+                          className={classes.navLink}
+                        >
+                          <Typography variant="h6">
+                            Register new cafe
+                          </Typography>
+                        </NavLink>
+                      </Box>
                     </Grid>
-                  </NavLink>
+                  </div>
                 )}
                 {user?.token ? (
                   <Button
