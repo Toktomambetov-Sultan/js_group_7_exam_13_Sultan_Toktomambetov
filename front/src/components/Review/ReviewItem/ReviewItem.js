@@ -1,5 +1,4 @@
 import {
-  Grid,
   makeStyles,
   Paper,
   Typography,
@@ -10,6 +9,8 @@ import ReviewAssessment from "./ReviewAssessment/ReviewAssessment";
 const useStyles = makeStyles((theme) => ({
   inner: {
     padding: "10px",
+    marginBottom: "10px",
+    borderBottom: "3px solid blue",
   },
   name: {
     fontSize: "18px",
@@ -28,15 +29,14 @@ const ReviewItem = ({ review }) => {
       </div>
       <div>
         <span className={classes.name}>time:</span>
-        <Moment format="DD.MM.YYYY HH.mm">
-          <Typography variant="subtitle2">
-            {review.date}
-          </Typography>
+        <Moment format="DD.MM.YYYY  HH:mm">
+          {review.date}
         </Moment>
       </div>
       <p>{review.text}</p>
       {Object.keys(review.rates)?.map((rateKey) => (
         <ReviewAssessment
+          readonly
           key={rateKey}
           rateKey={rateKey}
           rates={review.rates}

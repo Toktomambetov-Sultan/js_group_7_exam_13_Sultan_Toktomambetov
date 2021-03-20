@@ -12,11 +12,9 @@ import {
 } from "../../store/photo/photoActions";
 import "react-image-gallery/styles/css/image-gallery.css";
 import PhotoGallery from "../../components/Photo/PhotoGallery/PhotoGallery";
-import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
 import { Route } from "react-router-dom";
 import PhotoForm from "../../components/Photo/PhotoForm/PhotoForm";
-import { getReviews } from "../../store/review/reviewAction";
 import Reviews from "../Reviews/Reviews";
 
 const OneCafePage = ({ match }) => {

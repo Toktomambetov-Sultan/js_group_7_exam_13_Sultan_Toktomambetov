@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "5px",
   },
 }));
-const ReviewAssessment = ({ rates, rateKey }) => {
+const ReviewAssessment = ({ rates, rateKey, readonly, onChange }) => {
   const classes = useStyles();
   return (
     <Grid
@@ -22,10 +22,11 @@ const ReviewAssessment = ({ rates, rateKey }) => {
     >
       <span>{rateKey}:</span>
       <Rating
-        readonly={true}
+        readonly={readonly}
         initialRating={rates[rateKey] * 5}
         emptySymbol={<StarOutlineIcon />}
         fullSymbol={<StarIcon />}
+        onChange={onChange}
         placeholderSymbol={<StarHalfIcon />}
       />
     </Grid>

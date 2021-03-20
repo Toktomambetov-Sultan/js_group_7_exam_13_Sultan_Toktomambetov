@@ -22,7 +22,7 @@ const Review = new Schema({
     type: String,
     required: [
       true,
-      "Поле 'title' обязательна для заполнения",
+      "Поле 'text' обязательна для заполнения",
     ],
   },
   date: {

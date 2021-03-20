@@ -1,5 +1,7 @@
 import axiosOrder from "../../axiosOrder";
 import {
+  CLEAR_CURRENT_REVIEW,
+  CLEAR_REVIEWS,
   SET_CURRENT_REVIEW,
   SET_REVIEWS,
 } from "../actionsTypes";
@@ -16,6 +18,13 @@ export const setCurrentReview = (data) => {
 export const setReviews = (data) => {
   return { type: SET_REVIEWS, data };
 };
+export const clearCurrentReview = () => {
+  return { type: CLEAR_CURRENT_REVIEW };
+};
+
+export const clearReviews = () => {
+  return { type: CLEAR_REVIEWS };
+};
 
 export const getReviews = (id) => {
   return async (dispatch) => {
@@ -24,7 +33,6 @@ export const getReviews = (id) => {
       const response = await axiosOrder.get(
         `/reviews/${id}`
       );
-      console.log(response.data);
       dispatch(setReviews(response.data));
       dispatch(fetchSuccess());
     } catch (e) {

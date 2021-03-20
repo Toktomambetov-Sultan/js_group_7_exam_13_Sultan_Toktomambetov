@@ -11,7 +11,6 @@ router.get("/:id", async (req, res) => {
     const review = await schema.Review.find({
       cafe: req.params.id,
     }).populate("user", "displayName");
-    console.log(await schema.Review.find());
     res.send(review);
   } catch (error) {
     return await errorCatching(error);
@@ -34,6 +33,7 @@ router.post(
         user: req.user._id,
         cafe: req.params.id,
         rates: req.body.rates,
+        text: req.body.text,
       });
       await review.save();
       res.send(review);
