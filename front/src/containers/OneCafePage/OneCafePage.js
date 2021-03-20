@@ -16,6 +16,8 @@ import { makeStyles } from "@material-ui/core";
 import { push } from "connected-react-router";
 import { Route } from "react-router-dom";
 import PhotoForm from "../../components/Photo/PhotoForm/PhotoForm";
+import { getReviews } from "../../store/review/reviewAction";
+import Reviews from "../Reviews/Reviews";
 
 const OneCafePage = ({ match }) => {
   const dispatch = useDispatch();
@@ -29,10 +31,7 @@ const OneCafePage = ({ match }) => {
   useEffect(() => {
     dispatch(getPhotos(cafeId));
   }, [dispatch, cafeId]);
-    
-  useEffect(()=>{
 
-  },[dispatch]);
   const cafe = useSelector(
     (state) => state.cafe.currentCafe
   );
@@ -76,6 +75,7 @@ const OneCafePage = ({ match }) => {
           }
         />
       </Route>
+      <Reviews id={cafeId} />
     </div>
   );
 };

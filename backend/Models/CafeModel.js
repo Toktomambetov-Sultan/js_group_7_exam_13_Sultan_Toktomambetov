@@ -37,9 +37,7 @@ const Cafe = new Schema({
     required: true,
     default: 0,
   },
-  totalRates: {
-
-  }
+  totalRates: {},
 });
 
 Cafe.post("findOneAndDelete", async function (doc, next) {

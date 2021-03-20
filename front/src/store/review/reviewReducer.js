@@ -8,7 +8,11 @@ import {
 const initialState = {
   reviews: [],
   currentReview: {
-    rates: {},
+    rates: {
+      "Quality of foods": 0,
+      "Service quality": 0,
+      Interior: 0,
+    },
     text: "",
   },
 };

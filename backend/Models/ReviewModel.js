@@ -13,6 +13,11 @@ const Review = new Schema({
     ref: "User",
     required: true,
   },
+  cafe: {
+    type: Schema.Types.ObjectId,
+    ref: "Cafe",
+    required: true,
+  },
   text: {
     type: String,
     required: [
