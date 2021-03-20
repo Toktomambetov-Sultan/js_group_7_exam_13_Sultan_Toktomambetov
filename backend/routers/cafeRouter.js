@@ -77,4 +77,16 @@ router.put(
     }
   }
 );
+
+router.get("/:id", async (req, res) => {
+  try {
+    const cafe = await schema.Cafe.findById(
+      req.params.id
+    ).populate("user", "displayName");
+    return res.send(cafe);
+  } catch (error) {
+    return await errorCatching(e, res);
+  }
+});
+
 module.exports = router;

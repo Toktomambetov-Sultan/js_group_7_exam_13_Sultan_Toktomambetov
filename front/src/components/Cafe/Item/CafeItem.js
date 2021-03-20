@@ -1,4 +1,5 @@
 import {
+  Box,
   Grid,
   makeStyles,
   Paper,
@@ -20,28 +21,46 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     width: "100%",
+    maxWidth: "350px",
     height: "auto",
     cursor: "pointer",
   },
 }));
-const CafeItem = ({ cafe, user, onRateChange }) => {
+const CafeItem = ({
+  cafe,
+  user,
+  onRateChange,
+  onImageClick,
+  single = "",
+}) => {
   const classes = useStyles();
   return (
-    <Grid item>
-      <Paper elevation={3} className={classes.inner}>
+    <Grid item container justify="space-between">
+      <Paper
+        elevation={3}
+        className={`${classes.inner} ${single && "single"}`}
+      >
         <Typography variant="h5">{cafe.title}</Typography>
-        <img
-          onClick={(e) => console.log("Image")}
-          className={classes.image}
-          src={config.ImageUrl + cafe.image}
-          alt={cafe.title}
-        />
+        <Typography variant="caption">
+          created by: {cafe.user?.displayName}
+        </Typography>
+
+        {cafe.image && (
+          <div>
+            <img
+              onClick={onImageClick}
+              className={classes.image}
+              src={config.ImageUrl + cafe.image}
+              alt={cafe.title}
+            />
+          </div>
+        )}
         <Rating
           readonly={!user?.token}
           initialRating={cafe.totalRate * 5}
           emptySymbol={<StarOutlineIcon />}
           fullSymbol={<StarIcon />}
-          onChange={(num)=>onRateChange(num, cafe._id)}
+          onChange={(num) => onRateChange(num, cafe._id)}
           placeholderSymbol={<StarHalfIcon />}
         />
         <Typography variant="subtitle1">
@@ -58,6 +77,11 @@ const CafeItem = ({ cafe, user, onRateChange }) => {
           </Grid>
         </Typography>
       </Paper>
+      <Grid item>
+        <Box fontSize="20px" pt="10px">
+          {cafe.description}
+        </Box>
+      </Grid>
     </Grid>
   );
 };

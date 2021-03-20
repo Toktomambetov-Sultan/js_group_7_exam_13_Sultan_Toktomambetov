@@ -3,6 +3,7 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { push } from "connected-react-router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CafeItem from "../../components/Cafe/Item/CafeItem";
@@ -20,7 +21,10 @@ const CafeList = () => {
   }, [dispatch]);
   const onRateChange = (number, id) => {
     const countedNumber = number / 5;
-    dispatch(putRateCafe({ rate: countedNumber , id}));
+    dispatch(putRateCafe({ rate: countedNumber, id }));
+  };
+  const onImageClick = (id) => {
+    dispatch(push(`/cafe-list/${id}`));
   };
   return (
     <Container>
@@ -29,7 +33,7 @@ const CafeList = () => {
         <Grid
           container
           direction="row"
-          justify="start"
+          justify="flex-start"
         >
           {state.cafeList.map((cafe) => (
             <CafeItem
@@ -37,6 +41,7 @@ const CafeList = () => {
               key={cafe._id}
               user={user}
               onRateChange={onRateChange}
+              onImageClick={() => onImageClick(cafe._id)}
             />
           ))}
         </Grid>

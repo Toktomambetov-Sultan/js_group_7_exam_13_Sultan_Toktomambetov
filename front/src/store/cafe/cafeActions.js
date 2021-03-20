@@ -21,7 +21,7 @@ const setCafeList = (data) => {
 export const clearCafeList = () => {
   return { type: CLEAR_CAFE_LIST };
 };
-const clearCurrentCafe = () => {
+export const clearCurrentCafe = () => {
   return { type: CLEAR_CURRENT_CAFE };
 };
 
@@ -68,6 +68,19 @@ export const putRateCafe = ({ rate, id }) => {
       dispatch(fetchSuccess());
     } catch (e) {
       dispatch(fetchError(e.response.data.errors));
+    }
+  };
+};
+
+export const getOneCafe = (id) => {
+  return async (dispatch) => {
+    dispatch(fetchRequest());
+    try {
+      const response = await axiosOrder.get(`/cafe/${id}`);
+      dispatch(setCurrentCafe(response.data));
+      dispatch(fetchSuccess());
+    } catch (e) {
+      dispatch(fetchError(e));
     }
   };
 };
