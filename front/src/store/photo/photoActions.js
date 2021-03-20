@@ -55,3 +55,24 @@ export const postPhoto = ({ data, id }) => {
     }
   };
 };
+
+export const deletePhoto = ({ id, cafeId }) => {
+  return async (dispatch) => {
+    dispatch(fetchRequest());
+    try {
+      await axiosOrder.delete(`/photos/${id}`);
+      const response = await axiosOrder.get(
+        `/cafe/${cafeId}`
+      );
+      dispatch(setCurrentCafe(response.data));
+      const photoResponse = await axiosOrder.get(
+        `/photos/${cafeId}`
+      );
+      dispatch(setPhotos(photoResponse.data));
+      dispatch(fetchSuccess());
+      dispatch(push(`/cafe-list/${cafeId}`));
+    } catch (e) {
+      dispatch(fetchError(e.response.data.errors));
+    }
+  };
+};

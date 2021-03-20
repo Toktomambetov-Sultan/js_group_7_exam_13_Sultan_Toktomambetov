@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require("fs").promises;
 const config = require("./../config");
 
+const permit = require("../tools/routers/permitMiddleware");
 const uploadImage = require("../tools/routers/uploadImg");
 const authorizationMiddleware = require("../tools/routers/authorizationMiddleware");
 const errorCatching = require("../tools/routers/errorCatching");
@@ -55,15 +56,13 @@ router.post(
 );
 
 router.delete(
-  "/",
-  [authorizationMiddleware(true)],
+  "/:id",
+  [authorizationMiddleware(true), permit("admin")],
   async (req, res) => {
     try {
-      const photo = await schema.Photo.findById(
-        req.body.id
-      );
-
-      await schema.Photo.findByIdAndDelete(photo._id);
+      await schema.Photo.findOneAndDelete({
+        _id: req.params.id,
+      });
       res.send({ message: "successfully deleted" });
     } catch (error) {
       res.status(400).send({

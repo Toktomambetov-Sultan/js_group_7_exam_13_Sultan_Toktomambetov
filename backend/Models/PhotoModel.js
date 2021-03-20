@@ -23,13 +23,19 @@ Photo.post("findOneAndDelete", async function (doc, next) {
     (await fs.unlink(
       config.ImageUploadingDir + "/" + doc.image
     ));
+  console.log("I am here");
+  await mongoose
+    .model("CafeModel")
+    .findByIdAndUpdate(doc.cafe, {
+      $inc: { totalPhotos: -1 },
+    });
   next();
 });
 Photo.pre("deleteMany", async function (doc, next) {
   doc.image &&
     (await fs.unlink(
       config.ImageUploadingDir + "/" + doc.image
-    ))
+    ));
   next();
 });
 Photo.pre("save", async function (next, option) {

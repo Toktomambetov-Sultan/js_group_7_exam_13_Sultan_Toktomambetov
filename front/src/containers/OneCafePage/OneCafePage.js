@@ -6,6 +6,7 @@ import {
   clearCurrentCafe,
 } from "../../store/cafe/cafeActions";
 import {
+  deletePhoto,
   getPhotos,
   postPhoto,
   setCurrentPhoto,
@@ -45,7 +46,8 @@ const OneCafePage = ({ match }) => {
   };
   const onPhotoChange = (event) => {
     let { value, name, files } = event.target;
-    if (files[0]) { value = files[0];
+    if (files[0]) {
+      value = files[0];
       dispatch(
         setCurrentPhoto({ ...currentPhoto, [name]: value })
       );
@@ -55,16 +57,18 @@ const OneCafePage = ({ match }) => {
     event.preventDefault();
     dispatch(postPhoto({ data: currentPhoto, id: cafeId }));
   };
+  const onPhotoDelete = (id) => {
+    dispatch(deletePhoto({id, cafeId}));
+  };
   return (
     <div>
       <CafeItem cafe={cafe} single />
-      {photos.length ? (
         <PhotoGallery
           onAdd={onAddPhoto}
           photos={photos}
           user={user}
+          onDelete={onPhotoDelete}
         />
-      ) : null}
       <Route path="/cafe-list/:id/add-photo" exact>
         <PhotoForm
           photo={currentPhoto}
