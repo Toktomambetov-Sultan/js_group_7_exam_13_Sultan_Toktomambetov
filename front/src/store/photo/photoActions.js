@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import axiosOrder from "../../axiosOrder";
 import {
   SET_CURRENT_PHOTO,
@@ -48,6 +49,7 @@ export const postPhoto = ({ data, id }) => {
       );
       dispatch(setPhotos(photoResponse.data));
       dispatch(fetchSuccess());
+      dispatch(push(`/cafe-list/${id}`));
     } catch (e) {
       dispatch(fetchError(e.response.data.errors));
     }

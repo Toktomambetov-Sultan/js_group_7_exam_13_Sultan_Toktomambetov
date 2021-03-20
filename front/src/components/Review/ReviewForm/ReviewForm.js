@@ -13,6 +13,7 @@ const ReviewForm = ({
   onChange,
   onRateChange,
   onSubmit,
+  errors,
 }) => {
   const onRateChangeLocal = (num, name) => {
     onRateChange &&
@@ -30,6 +31,7 @@ const ReviewForm = ({
             name="text"
             value={review.text}
             onChange={onChange}
+            error={errors?.text}
           />
           {Object.keys(review.rates)?.map((rateKey) => (
             <ReviewAssessment

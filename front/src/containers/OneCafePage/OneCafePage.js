@@ -16,6 +16,7 @@ import { push } from "connected-react-router";
 import { Route } from "react-router-dom";
 import PhotoForm from "../../components/Photo/PhotoForm/PhotoForm";
 import Reviews from "../Reviews/Reviews";
+import { clearErrors } from "../../store/main/mainActions";
 
 const OneCafePage = ({ match }) => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const OneCafePage = ({ match }) => {
     dispatch(getOneCafe(cafeId));
     return () => {
       dispatch(clearCurrentCafe());
+      dispatch(clearErrors());
     };
   }, [dispatch, cafeId]);
   useEffect(() => {
@@ -54,14 +56,17 @@ const OneCafePage = ({ match }) => {
     event.preventDefault();
     dispatch(postPhoto({ data: currentPhoto, id: cafeId }));
   };
+  console.log(errors);
   return (
     <div>
       <CafeItem cafe={cafe} single />
-      <PhotoGallery
-        onAdd={onAddPhoto}
-        photos={photos}
-        user={user}
-      />
+      {photos.length ? (
+        <PhotoGallery
+          onAdd={onAddPhoto}
+          photos={photos}
+          user={user}
+        />
+      ) : null}
       <Route path="/cafe-list/:id/add-photo" exact>
         <PhotoForm
           photo={currentPhoto}

@@ -7,10 +7,7 @@ import { push } from "connected-react-router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CafeItem from "../../components/Cafe/Item/CafeItem";
-import {
-  getCafeList,
-  putRateCafe,
-} from "../../store/cafe/cafeActions";
+import { getCafeList } from "../../store/cafe/cafeActions";
 
 const CafeList = () => {
   const dispatch = useDispatch();
@@ -19,10 +16,6 @@ const CafeList = () => {
   useEffect(() => {
     dispatch(getCafeList());
   }, [dispatch]);
-  const onRateChange = (number, id) => {
-    const countedNumber = number / 5;
-    dispatch(putRateCafe({ rate: countedNumber, id }));
-  };
   const onImageClick = (id) => {
     dispatch(push(`/cafe-list/${id}`));
   };
@@ -40,7 +33,6 @@ const CafeList = () => {
               cafe={cafe}
               key={cafe._id}
               user={user}
-              onRateChange={onRateChange}
               onImageClick={() => onImageClick(cafe._id)}
             />
           ))}

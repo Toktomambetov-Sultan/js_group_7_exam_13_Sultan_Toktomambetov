@@ -72,6 +72,15 @@ Review.pre("save", async function (next, option) {
   next();
 });
 
+Review.pre("save", async function (next, option) {
+  await mongoose
+    .model("CafeModel")
+    .findByIdAndUpdate(this.cafe, {
+      $inc: { totalReviews: 1 },
+    });
+  next();
+});
+ 
 Review.post("findOneAndDelete", async function (doc, next) {
   next();
 });

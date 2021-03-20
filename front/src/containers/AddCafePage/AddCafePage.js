@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CafeForm from "../../components/Cafe/Form/CafeForm";
 import {
@@ -22,6 +22,9 @@ const AddCafePage = () => {
     dispatch(clearErrors());
     dispatch(setCurrentCafe({ ...cafe, [name]: value }));
   };
+  useEffect(() => {
+    return () => dispatch(clearErrors());
+  }, [dispatch]);
 
   const onSubmit = (event) => {
     event.preventDefault();

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReviewForm from "../../components/Review/ReviewForm/ReviewForm";
 import ReviewItem from "../../components/Review/ReviewItem/ReviewItem";
+import { clearErrors } from "../../store/main/mainActions";
 import {
   clearCurrentReview,
   getReviews,
@@ -27,12 +28,19 @@ const Reviews = ({ id }) => {
   const { reviews, currentReview } = useSelector(
     (state) => state.review
   );
+  const user = useSelector((state) => state.user.user);
+  const errors = useSelector((state) => state.main.errors);
   const onChange = (e) => {
     const { name, value } = e.target;
     dispatch(
       setCurrentReview({ ...currentReview, [name]: value })
     );
   };
+  useEffect(() => {
+    return () => {
+      dispatch(clearErrors());
+    };
+  }, [dispatch]);
   const onRateChange = (rates) => {
     dispatch(setCurrentReview({ ...currentReview, rates }));
   };
@@ -46,12 +54,15 @@ const Reviews = ({ id }) => {
       {reviews.map((review) => (
         <ReviewItem key={review._id} review={review} />
       ))}
-      <ReviewForm
-        review={currentReview}
-        onChange={onChange}
-        onSubmit={onSubmit}
-        onRateChange={onRateChange}
-      />
+      {user?.token && (
+        <ReviewForm
+          review={currentReview}
+          onChange={onChange}
+          onSubmit={onSubmit}
+          onRateChange={onRateChange}
+          errors={errors}
+        />
+      )}
     </div>
   );
 };
