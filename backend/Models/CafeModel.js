@@ -31,6 +31,16 @@ const Cafe = new Schema({
     required: true,
     default: 0,
   },
+  rate: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  reviews: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
 });
 
 Cafe.post("findOneAndDelete", async function (doc, next) {

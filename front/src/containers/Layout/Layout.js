@@ -14,7 +14,7 @@ import {
 import { push } from "connected-react-router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logOut } from "../../store/user/userActions";
 
 const useStyles = makeStyles((theme) => ({

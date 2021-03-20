@@ -1,3 +1,4 @@
+import { push } from "connected-react-router";
 import axiosOrder from "../../axiosOrder";
 import {
   CLEAR_CAFE_LIST,
@@ -45,12 +46,10 @@ export const postCurrentCafe = (data) => {
       formData.append(key, data[key]);
     });
     try {
-      const response = await axiosOrder.post(
-        "/cafe",
-        formData
-      );
+      await axiosOrder.post("/cafe", formData);
       dispatch(clearCurrentCafe());
       dispatch(fetchSuccess());
+      dispatch(push("/cafe-list"));
     } catch (e) {
       dispatch(fetchError(e.response.data.errors));
     }

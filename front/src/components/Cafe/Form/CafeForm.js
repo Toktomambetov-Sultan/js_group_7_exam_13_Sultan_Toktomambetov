@@ -4,7 +4,6 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-import { ErrorSharp } from "@material-ui/icons";
 import React from "react";
 import FileInput from "../../UI/Form/FileInput";
 import FormElement from "../../UI/Form/FormElement";
