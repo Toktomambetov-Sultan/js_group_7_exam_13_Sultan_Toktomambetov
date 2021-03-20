@@ -8,7 +8,6 @@ const storage = multer.diskStorage({
     cb(null, config.ImageUploadingDir);
   },
   filename: function (req, file, cb) {
-    console.log("I am here");
     cb(null, nanoid() + "-" + file.originalname);
   },
 });

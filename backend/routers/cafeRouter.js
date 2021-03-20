@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs").promises;
-
+const config = require("./../config");
 const uploadImage = require("../tools/routers/uploadImg");
 const authorizationMiddleware = require("../tools/routers/authorizationMiddleware");
 const errorCatching = require("../tools/routers/errorCatching");
@@ -26,7 +26,7 @@ router.post(
   [authorizationMiddleware(true)],
   async (req, res, next) => {
     try {
-      if (req.body.checkbox) {
+      if (req.body.checkbox === "true") {
         const cafe = new schema.Cafe({
           title: req.body.title,
           user: req.user._id,
@@ -38,8 +38,8 @@ router.post(
           message: "Заведение успешно зарегистрированно",
         });
       } else {
-        return res.send({
-          erorrs: { checkbox: "Поставьте галочку" },
+        return res.status(400).send({
+          errors: { checkbox: "Поставьте галочку" },
         });
       }
     } catch (e) {

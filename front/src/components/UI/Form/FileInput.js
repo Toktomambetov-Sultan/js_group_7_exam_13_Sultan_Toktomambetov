@@ -10,7 +10,13 @@ const useStyles = makeStyles({
   },
 });
 
-const FileInput = ({ onChange, name, label, id }) => {
+const FileInput = ({
+  onChange,
+  name,
+  label,
+  id,
+  error,
+}) => {
   const classes = useStyles();
   const inputRef = useRef();
   const [filename, setFilename] = useState("");
@@ -47,21 +53,18 @@ const FileInput = ({ onChange, name, label, id }) => {
         <Grid item xs>
           <TextField
             variant="outlined"
-            disabled
             fullWidth
             label={label}
             value={filename}
+            error={!!error}
+            disabled={!error && true}
+            helperText={error}
             onClick={activateInput}
           />
         </Grid>
-        <Grid item>
-          <Button
-            variant="contained"
-            onClick={activateInput}
-          >
-            Browse
-          </Button>
-        </Grid>
+        <Button variant="contained" onClick={activateInput}>
+          Browse
+        </Button>
       </Grid>
     </>
   );

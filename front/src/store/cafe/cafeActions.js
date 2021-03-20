@@ -49,11 +49,10 @@ export const postCurrentCafe = (data) => {
         "/cafe",
         formData
       );
-      console.log(response);
       dispatch(clearCurrentCafe());
       dispatch(fetchSuccess());
     } catch (e) {
-      dispatch(fetchError(e));
+      dispatch(fetchError(e.response.data.errors));
     }
   };
 };

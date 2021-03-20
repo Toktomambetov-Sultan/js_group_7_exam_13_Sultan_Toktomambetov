@@ -4,11 +4,18 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
+import { ErrorSharp } from "@material-ui/icons";
 import React from "react";
 import FileInput from "../../UI/Form/FileInput";
 import FormElement from "../../UI/Form/FormElement";
 
-const CafeForm = ({ cafe, onChange, title, onSubmit }) => {
+const CafeForm = ({
+  cafe,
+  errors,
+  onChange,
+  title,
+  onSubmit,
+}) => {
   return (
     <div>
       <Box mb="40px">
@@ -22,6 +29,7 @@ const CafeForm = ({ cafe, onChange, title, onSubmit }) => {
             name="title"
             required
             onChange={onChange}
+            error={errors.title}
           />
           <FormElement
             label="Description"
@@ -31,8 +39,13 @@ const CafeForm = ({ cafe, onChange, title, onSubmit }) => {
             rows={3}
             required
             onChange={onChange}
+            error={errors.description}
           />
-          <FileInput onChange={onChange} name="image" />
+          <FileInput
+            error={errors.image}
+            onChange={onChange}
+            name="image"
+          />
           <div>
             <p>Do you agree to Privacy Policy:</p>
             <Grid
@@ -48,7 +61,10 @@ const CafeForm = ({ cafe, onChange, title, onSubmit }) => {
                 required
                 onChange={onChange}
               />
-              <Typography variant="subtitle1">
+              <Typography
+                color={errors.checkbox && "secondary"}
+                variant="subtitle1"
+              >
                 I agree
               </Typography>
             </Grid>
