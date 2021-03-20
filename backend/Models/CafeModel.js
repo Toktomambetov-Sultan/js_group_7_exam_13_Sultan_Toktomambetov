@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const unpublicUser = require("../tools/models/unpublicUser");
 const fs = require("fs").promises;
 const config = require("../config");
 const Schema = mongoose.Schema;

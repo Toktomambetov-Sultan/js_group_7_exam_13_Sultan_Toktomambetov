@@ -56,8 +56,8 @@ const Layout = ({ children }) => {
           <Container>
             <Grid container direction="column">
               <Grid item container justify="space-between" alignItems="center">
-                <NavLink to="/gallery" exact className={classes.navLink}>
-                  <Typography variant="h4">Gallery</Typography>
+                <NavLink to="/cafe-list" exact className={classes.navLink}>
+                  <Typography variant="h4">Cafe critic</Typography>
                 </NavLink>
                 {user?.token && (
                   <NavLink

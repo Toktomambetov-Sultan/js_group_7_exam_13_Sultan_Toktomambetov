@@ -9,12 +9,18 @@ import { getInByGoogle } from "../../store/user/userActions";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const getInByGoogleHandler = (data) => dispatch(getInByGoogle(data));
-  const responseGoogle = (data) => getInByGoogleHandler(data);
+  const responseGoogle = (data) => {
+    dispatch(getInByGoogle(data));
+  };
   return (
     <Container>
       <Box pt={10}>
-        <Grid container direction="column" spacing={5} alignItems="center">
+        <Grid
+          container
+          direction="column"
+          spacing={5}
+          alignItems="center"
+        >
           <Grid item container spacing={5}>
             <Grid item xs={12} md={6}>
               <RegistrationPage />
@@ -29,7 +35,7 @@ const HomePage = () => {
             cookiePolicy={"single_host_origin"}
             onSuccess={responseGoogle}
             onFailure={responseGoogle}
-          ></GoogleLogin>
+          />
         </Grid>
       </Box>
     </Container>

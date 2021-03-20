@@ -27,6 +27,7 @@ const RegistrationPage = () => {
       password: "",
     }));
   };
+
   return (
     <UserForm
       title="Sing up"

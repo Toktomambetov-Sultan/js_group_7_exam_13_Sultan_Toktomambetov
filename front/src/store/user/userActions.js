@@ -8,7 +8,7 @@ import {
   FETCH_AUTHORIZATION_ERROR,
 } from "../actionsTypes";
 
-const path = "/gallery";
+const path = "/cafe-list";
 
 const fetchRequest = () => {
   return {
@@ -99,6 +99,7 @@ export const getInByGoogle = (data) => {
       dispatch(push(path));
       dispatch(fetchSuccess());
     } catch (error) {
+      console.log(error);
       dispatch(fetchAuthorizationError(error.response?.data));
       dispatch(setUserData(null));
       dispatch(push("/"));

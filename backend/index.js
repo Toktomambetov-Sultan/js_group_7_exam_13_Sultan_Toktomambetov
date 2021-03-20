@@ -6,7 +6,6 @@ const cors = require("cors");
 const app = express();
 
 const userRouter = require("./routers/userRouter");
-const photoRouter = require("./routers/photoRouter");
 
 const run = async () => {
   try {
@@ -27,7 +26,6 @@ const run = async () => {
   app.use(express.json());
 
   app.use("/users", userRouter);
-  app.use("/photos", photoRouter);
 
   app.listen(config.port, () => {
     console.log(`Server started on ${config.port} port.`);
