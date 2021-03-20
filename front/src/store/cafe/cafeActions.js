@@ -55,3 +55,19 @@ export const postCurrentCafe = (data) => {
     }
   };
 };
+
+export const putRateCafe = ({ rate, id }) => {
+  return async (dispatch) => {
+    dispatch(fetchRequest());
+    try {
+      await axiosOrder.put(`/cafe/put-rate/${id}`, {
+        rate,
+      });
+      const response = await axiosOrder.get("/cafe");
+      dispatch(setCafeList(response.data));
+      dispatch(fetchSuccess());
+    } catch (e) {
+      dispatch(fetchError(e.response.data.errors));
+    }
+  };
+};

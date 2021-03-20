@@ -28,7 +28,7 @@ const CafeForm = ({
             name="title"
             required
             onChange={onChange}
-            error={errors.title}
+            error={errors?.title}
           />
           <FormElement
             label="Description"
@@ -38,10 +38,10 @@ const CafeForm = ({
             rows={3}
             required
             onChange={onChange}
-            error={errors.description}
+            error={errors?.description}
           />
           <FileInput
-            error={errors.image}
+            error={errors?.image}
             onChange={onChange}
             name="image"
           />
@@ -61,7 +61,7 @@ const CafeForm = ({
                 onChange={onChange}
               />
               <Typography
-                color={errors.checkbox && "secondary"}
+                color={errors?.checkbox && "secondary"}
                 variant="subtitle1"
               >
                 I agree

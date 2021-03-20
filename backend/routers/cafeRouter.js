@@ -52,4 +52,29 @@ router.post(
   }
 );
 
+router.put(
+  "/put-rate/:id",
+  authorizationMiddleware(true),
+  async (req, res) => {
+    try {
+      const cafe = await schema.Cafe.findById(
+        req.params.id
+      );
+      const rate_id = cafe.rates.findIndex(
+        (rate) =>
+          rate.user.toString() === req.user._id.toString()
+      );
+      rate_id + 1
+        ? (cafe.rates[rate_id].rate = req.body.rate)
+        : cafe.rates.push({
+            user: req.user._id,
+            rate: req.body.rate,
+          });
+      await cafe.save();
+      res.send({ message: "Заведение успешно оцененно" });
+    } catch (e) {
+      return await errorCatching(e, res);
+    }
+  }
+);
 module.exports = router;

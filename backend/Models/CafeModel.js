@@ -7,6 +7,7 @@ const Cafe = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   title: {
     type: String,
@@ -31,15 +32,32 @@ const Cafe = new Schema({
     required: true,
     default: 0,
   },
-  rate: {
-    type: Number,
-    required: true,
-    default: 0,
-  },
+  rates: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      rate: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   reviews: {
     type: Number,
     required: true,
     default: 0,
+  },
+});
+
+Cafe.set("toJSON", {
+  transform: function (doc, ret, options) {
+    ret.totalRate =
+      ret.rates.reduce((acc, { rate }) => +rate + acc, 0) /
+      ret.rates.length;
+    return ret;
   },
 });
 

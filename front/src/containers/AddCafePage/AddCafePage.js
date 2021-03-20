@@ -13,7 +13,6 @@ const AddCafePage = () => {
     (state) => state.cafe.currentCafe
   );
   const errors = useSelector((state) => state.main.errors);
-  console.log(errors);
   const onChange = (event) => {
     let { value, name, files } = event.target;
 

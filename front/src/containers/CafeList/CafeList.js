@@ -6,7 +6,10 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CafeItem from "../../components/Cafe/Item/CafeItem";
-import { getCafeList } from "../../store/cafe/cafeActions";
+import {
+  getCafeList,
+  putRateCafe,
+} from "../../store/cafe/cafeActions";
 
 const CafeList = () => {
   const dispatch = useDispatch();
@@ -15,6 +18,10 @@ const CafeList = () => {
   useEffect(() => {
     dispatch(getCafeList());
   }, [dispatch]);
+  const onRateChange = (number, id) => {
+    const countedNumber = number / 5;
+    dispatch(putRateCafe({ rate: countedNumber , id}));
+  };
   return (
     <Container>
       <Typography variant="h5">List of cafes</Typography>
@@ -22,13 +29,14 @@ const CafeList = () => {
         <Grid
           container
           direction="row"
-          justify="space-between"
+          justify="start"
         >
           {state.cafeList.map((cafe) => (
             <CafeItem
               cafe={cafe}
               key={cafe._id}
               user={user}
+              onRateChange={onRateChange}
             />
           ))}
         </Grid>
