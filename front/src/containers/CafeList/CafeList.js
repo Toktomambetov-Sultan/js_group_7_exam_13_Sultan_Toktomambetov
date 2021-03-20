@@ -7,7 +7,10 @@ import { push } from "connected-react-router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CafeItem from "../../components/Cafe/Item/CafeItem";
-import { getCafeList } from "../../store/cafe/cafeActions";
+import {
+  deleteOneCafe,
+  getCafeList,
+} from "../../store/cafe/cafeActions";
 
 const CafeList = () => {
   const dispatch = useDispatch();
@@ -18,6 +21,9 @@ const CafeList = () => {
   }, [dispatch]);
   const onImageClick = (id) => {
     dispatch(push(`/cafe-list/${id}`));
+  };
+  const deleteCafe = (id) => {
+    dispatch(deleteOneCafe(id));
   };
   return (
     <Container>
@@ -34,6 +40,7 @@ const CafeList = () => {
               key={cafe._id}
               user={user}
               onImageClick={() => onImageClick(cafe._id)}
+              onDelete={() => deleteCafe(cafe._id)}
             />
           ))}
         </Grid>

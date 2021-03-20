@@ -25,11 +25,18 @@ Photo.post("findOneAndDelete", async function (doc, next) {
     ));
   next();
 });
+Photo.pre("deleteMany", async function (doc, next) {
+  doc.image &&
+    (await fs.unlink(
+      config.ImageUploadingDir + "/" + doc.image
+    ))
+  next();
+});
 Photo.pre("save", async function (next, option) {
   await mongoose
     .model("CafeModel")
     .findByIdAndUpdate(this.cafe, {
-      $inc: { totalPhotos: 1},
+      $inc: { totalPhotos: 1 },
     });
   next();
 });

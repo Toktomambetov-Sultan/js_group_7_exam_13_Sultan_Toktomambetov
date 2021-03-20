@@ -33,7 +33,7 @@ export const getCafeList = () => {
       dispatch(setCafeList(response.data));
       dispatch(fetchSuccess());
     } catch (e) {
-      dispatch(fetchError(e));
+      dispatch(fetchError(e.response?.data?.errors));
     }
   };
 };
@@ -51,7 +51,7 @@ export const postCurrentCafe = (data) => {
       dispatch(fetchSuccess());
       dispatch(push("/cafe-list"));
     } catch (e) {
-      dispatch(fetchError(e.response.data.errors));
+      dispatch(fetchError(e.response?.data?.errors));
     }
   };
 };
@@ -67,7 +67,7 @@ export const putRateCafe = ({ rate, id }) => {
       dispatch(setCafeList(response.data));
       dispatch(fetchSuccess());
     } catch (e) {
-      dispatch(fetchError(e.response.data.errors));
+      dispatch(fetchError(e.response?.data?.errors));
     }
   };
 };
@@ -80,7 +80,21 @@ export const getOneCafe = (id) => {
       dispatch(setCurrentCafe(response.data));
       dispatch(fetchSuccess());
     } catch (e) {
-      dispatch(fetchError(e));
+      dispatch(fetchError(e.response?.data?.errors));
+    }
+  };
+};
+
+export const deleteOneCafe = (id) => {
+  return async (dispatch) => {
+    dispatch(fetchRequest());
+    try {
+      await axiosOrder.delete(`/cafe/${id}`);
+      const response = await axiosOrder.get("/cafe");
+      dispatch(setCafeList(response.data));
+      dispatch(fetchSuccess());
+    } catch (e) {
+      dispatch(fetchError(e.response.data.errors));
     }
   };
 };

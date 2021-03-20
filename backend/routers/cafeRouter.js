@@ -5,6 +5,7 @@ const config = require("./../config");
 const uploadImage = require("../tools/routers/uploadImg");
 const authorizationMiddleware = require("../tools/routers/authorizationMiddleware");
 const errorCatching = require("../tools/routers/errorCatching");
+const permit = require("../tools/routers/permitMiddleware");
 
 const schema = require("../Models");
 
@@ -63,4 +64,20 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.delete(
+  "/:id",
+  [authorizationMiddleware(true), permit("admin")],
+  async (req, res) => {
+    try {
+      await schema.Cafe.findOneAndDelete({
+        _id: req.params.id,
+      });
+      return res.send({
+        message: "Заведение успешно удаленно!",
+      });
+    } catch (e) {
+      return await errorCatching(e, res);
+    }
+  }
+);
 module.exports = router;

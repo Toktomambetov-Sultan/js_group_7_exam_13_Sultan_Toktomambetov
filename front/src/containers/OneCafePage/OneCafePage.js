@@ -45,8 +45,7 @@ const OneCafePage = ({ match }) => {
   };
   const onPhotoChange = (event) => {
     let { value, name, files } = event.target;
-    if (files[0]) {
-      value = files[0];
+    if (files[0]) { value = files[0];
       dispatch(
         setCurrentPhoto({ ...currentPhoto, [name]: value })
       );
@@ -56,7 +55,6 @@ const OneCafePage = ({ match }) => {
     event.preventDefault();
     dispatch(postPhoto({ data: currentPhoto, id: cafeId }));
   };
-  console.log(errors);
   return (
     <div>
       <CafeItem cafe={cafe} single />

@@ -21,6 +21,11 @@ const UserModel = new Schema({
     default:
       "https://multifoto.ru/local/templates/aspro_next/images/icon.png?t=t",
   },
+  role: {
+    type: String,
+    default: "user",
+    enum: ["user", "admin"],
+  },
   password: {
     required: true,
     type: String,

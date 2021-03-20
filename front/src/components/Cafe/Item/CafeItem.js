@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Grid,
   makeStyles,
   Paper,
@@ -26,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
   },
 }));
-const CafeItem = ({ cafe, onImageClick, single = "" }) => {
+const CafeItem = ({
+  cafe,
+  onImageClick,
+  single = "",
+  onDelete,
+  user,
+}) => {
   const classes = useStyles();
   return (
     <Grid item>
@@ -70,6 +77,18 @@ const CafeItem = ({ cafe, onImageClick, single = "" }) => {
               <>{+cafe.totalPhotos} photos</>
             </Grid>
           </Typography>
+          {user?.role === "admin" && (
+            <Box pt={3}>
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={onDelete}
+                fullWidth
+              >
+                Delete
+              </Button>
+            </Box>
+          )}
         </Paper>
         {single && (
           <Grid item>

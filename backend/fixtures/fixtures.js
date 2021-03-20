@@ -39,34 +39,70 @@ db.once("open", async () => {
       "Collections were not present, skipping drop..."
     );
   }
-  const user = await schema.User.create({
-    username: "User",
-    password: "H1h2h3h4",
-    displayName: "User",
-    token: "asldflksdjlkiowerkjkwejjklsjkdslkkljsdlkj123",
-  });
-  const cafe = await schema.Cafe.create({
-    user: user._id,
-    title: "title",
-    description: "description",
-    image: "1.jpeg",
-  });
+  const [user, moder] = await schema.User.create(
+    {
+      username: "User",
+      password: "H1h2h3h4",
+      displayName: "User",
+      email: "ww.rr@dd.x",
+      token: nanoid(),
+    },
+    {
+      username: "Admin",
+      password: "H1h2h3h4",
+      email: "ww.rr@dd.r",
+      displayName: "Admin",
+      role: "admin",
+      token: nanoid(),
+    }
+  );
+  const cafe = await schema.Cafe.create(
+    {
+      user: user._id,
+      title: "title",
+      description: "description",
+      image: "1.jpeg",
+    }
+  );
   const photo = await schema.Photo.create({
     user: user._id,
     image: "2.jpeg",
     cafe: cafe._id,
   });
-  const review = await schema.Review.create({
-    rates: {
-      "Quality of food": 0.4,
-      "Service quality": 0.2,
-      Interior: 0.6,
+  const [review] = await schema.Review.create(
+    {
+      rates: {
+        "Quality of food": 0.4,
+        "Service quality": 0.2,
+        Interior: 0.6,
+      },
+      user: user._id,
+      text: "review",
+      cafe: cafe._id,
     },
-    user: user._id,
-    text: "review",
-    cafe: cafe._id,
-  });
+    {
+      rates: {
+        "Quality of food": 0.4,
+        "Service quality": 0.2,
+        Interior: 0.6,
+      },
+      user: user._id,
+      text: "review",
+      cafe: cafe._id,
+    },
+    {
+      rates: {
+        "Quality of food": 0.4,
+        "Service quality": 0.2,
+        Interior: 0.6,
+      },
+      user: user._id,
+      text: "review",
+      cafe: cafe._id,
+    }
+  );
 
   console.log(`User: ${user.token}`);
+  console.log(`Moder: ${moder.token}`);
   db.close();
 });

@@ -63,6 +63,22 @@ Cafe.post("findOneAndDelete", async function (doc, next) {
     (await fs.unlink(
       config.ImageUploadingDir + "/" + doc.image
     ));
+  const photos = await mongoose
+    .model("Photo")
+    .find({ cafe: doc._id });
+  await mongoose
+    .model("Review")
+    .deleteMany({ cafe: doc._id });
+  for (let doc of photos) {
+    doc.image &&
+      (await fs.unlink(
+        config.ImageUploadingDir + "/" + doc.image
+      ));
+  }
+  await mongoose
+    .model("Photo")
+    .deleteMany({ cafe: doc._id });
+
   next();
 });
 
