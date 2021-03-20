@@ -1,7 +1,7 @@
 import React from "react";
 
 const CafeList = () => {
-  return <div>hello</div>;
+  return <div>I am here</div>;
 };
 
 export default CafeList;

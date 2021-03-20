@@ -1,17 +1,26 @@
 import userReducer from "./user/userReducer";
-import galleryReducer from "./gallery/galleryReducer";
-
-import { applyMiddleware, combineReducers, createStore } from "redux";
+import mainReducer from "./main/mainReducer";
+import {
+  applyMiddleware,
+  combineReducers,
+  createStore,
+} from "redux";
 import thunk from "redux-thunk";
 import { createBrowserHistory } from "history";
-import { connectRouter, routerMiddleware } from "connected-react-router";
-import { loadFromLocalStorage, saveToLocalStorage } from "./localStoragesTools";
+import {
+  connectRouter,
+  routerMiddleware,
+} from "connected-react-router";
+import {
+  loadFromLocalStorage,
+  saveToLocalStorage,
+} from "./localStoragesTools";
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   user: userReducer,
-  gallery: galleryReducer,
+  main: mainReducer,
   router: connectRouter(history),
 });
 

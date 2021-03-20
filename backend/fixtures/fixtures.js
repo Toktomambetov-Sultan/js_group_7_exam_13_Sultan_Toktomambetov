@@ -15,13 +15,17 @@ const db = mongoose.connection;
 
 db.once("open", async () => {
   await Promise.all(
-    (await fs.readdir(config.ImageUploadingDir)).map((item) => {
-      if (item === ".gitignore") return;
-      fs.unlink(config.ImageUploadingDir + "/" + item);
-    })
+    (await fs.readdir(config.ImageUploadingDir)).map(
+      (item) => {
+        if (item === ".gitignore") return;
+        fs.unlink(config.ImageUploadingDir + "/" + item);
+      }
+    )
   );
   await Promise.all(
-    (await fs.readdir(config.FixturesImagesDir)).map((item) =>
+    (
+      await fs.readdir(config.FixturesImagesDir)
+    ).map((item) =>
       fs.copyFile(
         `${config.FixturesImagesDir}/${item}`,
         `${config.ImageUploadingDir}/${item}`
@@ -31,7 +35,9 @@ db.once("open", async () => {
   try {
     await db.dropDatabase();
   } catch (e) {
-    console.log("Collections were not present, skipping drop...");
+    console.log(
+      "Collections were not present, skipping drop..."
+    );
   }
   const user = await schema.User.create({
     username: "User",
@@ -39,6 +45,13 @@ db.once("open", async () => {
     displayName: "User",
     token: nanoid(),
   });
-   
+  const cafe = await schema.Cafe.create({
+    user: user._id,
+    title: "title",
+    description: "description",
+    image: "1.jpeg",
+  });
+  console.log(`User: ${user.token}`);
+
   db.close();
 });

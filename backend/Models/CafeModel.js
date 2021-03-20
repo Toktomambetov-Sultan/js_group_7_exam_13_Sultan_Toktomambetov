@@ -10,17 +10,30 @@ const Cafe = new Schema({
   },
   title: {
     type: String,
-    required: true,
+    required: [
+      true,
+      "Поле 'title' обязательна для заполнения",
+    ],
+  },
+  description: {
+    type: String,
+    required: [
+      true,
+      "Поле 'description' обязательна для заполнения",
+    ],
   },
   image: {
     type: String,
     required: true,
   },
 });
+
 Cafe.post("findOneAndDelete", async function (doc, next) {
-  doc.image && (await fs.unlink(config.ImageUploadingDir + "/" + doc.image));
+  doc.image &&
+    (await fs.unlink(
+      config.ImageUploadingDir + "/" + doc.image
+    ));
   next();
 });
-
 
 module.exports = Cafe;

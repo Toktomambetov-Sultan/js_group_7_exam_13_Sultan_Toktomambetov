@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
   const classes = useStyles();
 
   const user = useSelector((state) => state.user.user);
-  const state = useSelector((state) => state.gallery);
+  const state = useSelector((state) => state.main);
   const dispatch = useDispatch();
   const logOutHandler = () => {
     dispatch(logOut());
