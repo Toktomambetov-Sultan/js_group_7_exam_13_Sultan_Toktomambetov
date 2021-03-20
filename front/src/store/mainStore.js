@@ -2,6 +2,7 @@ import userReducer from "./user/userReducer";
 import mainReducer from "./main/mainReducer";
 import cafeReducer from "./cafe/cafeReducer";
 import photoReducer from "./photo/photoReducer";
+import reviewReducer from "./review/reviewReducer";
 
 import {
   applyMiddleware,
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   main: mainReducer,
   cafe: cafeReducer,
+  review: reviewReducer, 
   router: connectRouter(history),
 });
 

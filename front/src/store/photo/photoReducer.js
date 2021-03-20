@@ -1,4 +1,3 @@
-import { CallToActionSharp } from "@material-ui/icons";
 import {
   CLEAR_PHOTOS,
   SET_CURRENT_PHOTO,

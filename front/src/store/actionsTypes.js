@@ -22,3 +22,8 @@ export const CLEAR_CAFE_LIST = "CLEAR_CAFE_LIST";
 export const SET_CURRENT_PHOTO = "SET_CURRENT_PHOTO";
 export const SET_PHOTOS = "SET_PHOTOS";
 export const CLEAR_PHOTOS = "CLEAR_PHOTOS";
+//reviews
+export const SET_CURRENT_REVIEW = "SET_CURRENT_REVIEW";
+export const SET_REVIEWS = "SET_REVIEWS";
+export const CLEAR_CURRENT_REVIEW = "CLEAR_CURRENT_REVIEW";
+export const CLEAR_REVIEWS = "CLEAR_REVIEWS";

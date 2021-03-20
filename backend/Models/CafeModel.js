@@ -32,33 +32,14 @@ const Cafe = new Schema({
     required: true,
     default: 0,
   },
-  rates: [
-    {
-      user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
-      rate: {
-        type: Number,
-        required: true,
-      },
-    },
-  ],
   totalReviews: {
     type: Number,
     required: true,
     default: 0,
   },
-});
+  totalRates: {
 
-Cafe.set("toJSON", {
-  transform: function (doc, ret, options) {
-    ret.totalRate =
-      ret.rates.reduce((acc, { rate }) => +rate + acc, 0) /
-      ret.rates.length;
-    return ret;
-  },
+  }
 });
 
 Cafe.post("findOneAndDelete", async function (doc, next) {

@@ -56,6 +56,16 @@ db.once("open", async () => {
     image: "2.jpeg",
     cafe: cafe._id,
   });
+  const review = await schema.Review.create({
+    rates: {
+      "Quality of food": 0.4,
+      "Service quality": 0.2,
+      Interior: 0.6,
+    },
+    user: user._id,
+    text: "review",
+    cafe: cafe._id,
+  });
 
   console.log(`User: ${user.token}`);
   db.close();

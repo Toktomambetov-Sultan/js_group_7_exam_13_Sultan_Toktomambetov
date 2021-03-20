@@ -8,6 +8,7 @@ const app = express();
 const userRouter = require("./routers/userRouter");
 const cafeRouter = require("./routers/cafeRouter");
 const photoRouter = require("./routers/photoRouter");
+const reviewRouter = require("./routers/reviewRouter");
 
 const run = async () => {
   try {
@@ -30,7 +31,8 @@ const run = async () => {
   app.use("/users", userRouter);
   app.use("/cafe", cafeRouter);
   app.use("/photos", photoRouter);
-
+  app.use("/reviews", reviewRouter);
+   
   app.listen(config.port, () => {
     console.log(`Server started on ${config.port} port.`);
   });

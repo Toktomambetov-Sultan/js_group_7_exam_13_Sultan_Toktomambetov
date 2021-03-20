@@ -24,14 +24,7 @@ const PhotoGallery = ({ photos, user, onAdd }) => {
           </Button>
         </Box>
       )}
-      <ImageGallery
-        items={[
-          ...photos.map((item) => ({
-            original: config.ImageUrl + item.image,
-            thumbnail: config.ImageUrl + item.image,
-          })),
-        ]}
-      />
+      <ImageGallery items={[...items]} />
     </div>
   );
 };
