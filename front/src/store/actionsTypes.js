@@ -12,7 +12,13 @@ export const FETCH_AUTHORIZATION_ERROR =
   "FETCH_AUTHORIZATION_ERROR";
 export const SET_USER_DATA = "SET_USER_DATA";
 
+//cafe
 export const SET_CURRENT_CAFE = "SET_CURRENT_CAFE";
 export const SET_CAFE_LIST = "SET_CAFE_LIST";
 export const CLEAR_CURRENT_CAFE = "CLEAR_CURRENT_CAFE";
 export const CLEAR_CAFE_LIST = "CLEAR_CAFE_LIST";
+
+//photos
+export const SET_CURRENT_PHOTO = "SET_CURRENT_PHOTO";
+export const SET_PHOTOS = "SET_PHOTOS";
+export const CLEAR_PHOTOS = "CLEAR_PHOTOS";

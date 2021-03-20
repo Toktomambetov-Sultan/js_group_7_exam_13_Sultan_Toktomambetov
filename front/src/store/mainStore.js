@@ -1,6 +1,8 @@
 import userReducer from "./user/userReducer";
 import mainReducer from "./main/mainReducer";
 import cafeReducer from "./cafe/cafeReducer";
+import photoReducer from "./photo/photoReducer";
+
 import {
   applyMiddleware,
   combineReducers,
@@ -20,6 +22,7 @@ import {
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
+  photo: photoReducer,
   user: userReducer,
   main: mainReducer,
   cafe: cafeReducer,

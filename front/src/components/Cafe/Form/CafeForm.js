@@ -33,8 +33,7 @@ const CafeForm = ({
           <FormElement
             label="Description"
             value={cafe.description}
-            name="description"
-            multiline
+            name="description" multiline
             rows={3}
             required
             onChange={onChange}

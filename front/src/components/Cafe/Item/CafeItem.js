@@ -35,52 +35,56 @@ const CafeItem = ({
 }) => {
   const classes = useStyles();
   return (
-    <Grid item container justify="space-between">
-      <Paper
-        elevation={3}
-        className={`${classes.inner} ${single && "single"}`}
+    <Grid item>
+      <Grid
+        container
+        justify={single ? "space-between" : "flex-start"}
       >
-        <Typography variant="h5">{cafe.title}</Typography>
-        <Typography variant="caption">
-          created by: {cafe.user?.displayName}
-        </Typography>
+        <Paper elevation={3} className={classes.inner}>
+          <Typography variant="h5">{cafe.title}</Typography>
+          <Typography variant="caption">
+            created by: {cafe.user?.displayName}
+          </Typography>
 
-        {cafe.image && (
-          <div>
-            <img
-              onClick={onImageClick}
-              className={classes.image}
-              src={config.ImageUrl + cafe.image}
-              alt={cafe.title}
-            />
-          </div>
-        )}
-        <Rating
-          readonly={!user?.token}
-          initialRating={cafe.totalRate * 5}
-          emptySymbol={<StarOutlineIcon />}
-          fullSymbol={<StarIcon />}
-          onChange={(num) => onRateChange(num, cafe._id)}
-          placeholderSymbol={<StarHalfIcon />}
-        />
-        <Typography variant="subtitle1">
-          ({+cafe.reviews} reviews)
-        </Typography>
-        <Typography variant="subtitle2">
-          <Grid
-            container
-            alignItems="center"
-            justify="center"
-          >
-            <PhotoCameraIcon fontSize="small" />
-            <>{+cafe.totalPhoto} photos</>
+          {cafe.image && (
+            <div>
+              <img
+                onClick={onImageClick}
+                className={classes.image}
+                src={config.ImageUrl + cafe.image}
+                alt={cafe.title}
+              />
+            </div>
+          )}
+          <Rating
+            readonly={!user?.token}
+            initialRating={cafe.totalRate * 5}
+            emptySymbol={<StarOutlineIcon />}
+            fullSymbol={<StarIcon />}
+            onChange={(num) => onRateChange(num, cafe._id)}
+            placeholderSymbol={<StarHalfIcon />}
+          />
+          <Typography variant="subtitle1">
+            ({+cafe.totalReviews} reviews)
+          </Typography>
+          <Typography variant="subtitle2">
+            <Grid
+              container
+              alignItems="center"
+              justify="center"
+            >
+              <PhotoCameraIcon fontSize="small" />
+              <>{+cafe.totalPhotos} photos</>
+            </Grid>
+          </Typography>
+        </Paper>
+        {single && (
+          <Grid item>
+            <Box fontSize="20px" pt="10px">
+              {cafe.description}
+            </Box>
           </Grid>
-        </Typography>
-      </Paper>
-      <Grid item>
-        <Box fontSize="20px" pt="10px">
-          {cafe.description}
-        </Box>
+        )}
       </Grid>
     </Grid>
   );

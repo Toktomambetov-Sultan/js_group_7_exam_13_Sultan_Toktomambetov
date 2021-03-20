@@ -30,6 +30,11 @@ const App = () => {
           exact
           component={OneCafePage}
         />
+        <Route
+          path="/cafe-list/:id/add-photo"
+          exact
+          component={OneCafePage}
+        />
         <CustomRoute
           path="/add-cafe"
           exact

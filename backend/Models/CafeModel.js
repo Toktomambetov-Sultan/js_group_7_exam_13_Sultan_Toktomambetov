@@ -27,7 +27,7 @@ const Cafe = new Schema({
     type: String,
     required: true,
   },
-  totalPhoto: {
+  totalPhotos: {
     type: Number,
     required: true,
     default: 0,
@@ -45,7 +45,7 @@ const Cafe = new Schema({
       },
     },
   ],
-  reviews: {
+  totalReviews: {
     type: Number,
     required: true,
     default: 0,

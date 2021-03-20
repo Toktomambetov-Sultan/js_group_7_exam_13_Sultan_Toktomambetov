@@ -43,7 +43,7 @@ db.once("open", async () => {
     username: "User",
     password: "H1h2h3h4",
     displayName: "User",
-    token: nanoid(),
+    token: "asldflksdjlkiowerkjkwejjklsjkdslkkljsdlkj123",
   });
   const cafe = await schema.Cafe.create({
     user: user._id,
@@ -51,7 +51,12 @@ db.once("open", async () => {
     description: "description",
     image: "1.jpeg",
   });
-  console.log(`User: ${user.token}`);
+  const photo = await schema.Photo.create({
+    user: user._id,
+    image: "2.jpeg",
+    cafe: cafe._id,
+  });
 
+  console.log(`User: ${user.token}`);
   db.close();
 });
