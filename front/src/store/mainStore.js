@@ -1,5 +1,6 @@
 import userReducer from "./user/userReducer";
 import mainReducer from "./main/mainReducer";
+import cafeReducer from "./cafe/cafeReducer";
 import {
   applyMiddleware,
   combineReducers,
@@ -21,6 +22,7 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: userReducer,
   main: mainReducer,
+  cafe: cafeReducer,
   router: connectRouter(history),
 });
 

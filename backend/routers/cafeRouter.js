@@ -10,15 +10,11 @@ const schema = require("../Models");
 
 router.get("/", async (req, res) => {
   try {
-    const cafe = await schema.Cafe.find(
-      req.query.id
-        ? {
-            user: req.query.id,
-          }
-        : {}
-    ).populate("user", "username");
-    let user = null;
-    res.send({ cafe, user });
+    const cafe = await schema.Cafe.find().populate(
+      "user",
+      "username"
+    );
+    return res.send(cafe);
   } catch (error) {
     return await errorCatching(e, res);
   }
