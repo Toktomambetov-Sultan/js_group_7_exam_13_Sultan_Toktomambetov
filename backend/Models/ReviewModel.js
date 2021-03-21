@@ -40,6 +40,31 @@ const Review = new Schema({
     required: true,
   },
 });
+Review.post("findOneAndDelete", async function (doc, next) {
+  const cafe = await mongoose
+    .model("CafeModel")
+    .findOne({ _id: doc.cafe });
+  const reviews = await mongoose
+    .model("Review")
+    .find({ cafe: doc.cafe });
+  const overall = {
+    ...Object.keys(doc.rates).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]:
+          [
+            ...reviews.map((review) => review.rates[key]),
+          ].reduce((acc, rate) => acc + rate, 0) /
+          (reviews.length + 1),
+      }),
+      {}
+    ),
+  };
+  cafe.totalReviews = reviews.length;
+  cafe.rates = overall;
+  await cafe.save();
+  next();
+});
 
 Review.pre("save", async function (next, option) {
   const cafe = await mongoose
@@ -80,7 +105,7 @@ Review.pre("save", async function (next, option) {
     });
   next();
 });
- 
+
 Review.post("findOneAndDelete", async function (doc, next) {
   next();
 });

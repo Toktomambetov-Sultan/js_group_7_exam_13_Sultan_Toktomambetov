@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
+const permit = require("../tools/routers/permitMiddleware");
 const authorizationMiddleware = require("../tools/routers/authorizationMiddleware");
 const errorCatching = require("../tools/routers/errorCatching");
 
@@ -44,5 +45,20 @@ router.post(
     }
   }
 );
-
+router.delete(
+  "/:id",
+  [authorizationMiddleware(true), permit("admin")],
+  async (req, res) => {
+    try {
+      await schema.Review.findOneAndDelete({
+        _id: req.params.id,
+      });
+      return res.send({
+        message: "Отзыв успешно удален.",
+      });
+    } catch (e) {
+      return await errorCatching(e, res);
+    }
+  }
+);
 module.exports = router;

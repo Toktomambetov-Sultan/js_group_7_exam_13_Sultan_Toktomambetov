@@ -6,6 +6,7 @@ import ReviewItem from "../../components/Review/ReviewItem/ReviewItem";
 import { clearErrors } from "../../store/main/mainActions";
 import {
   clearCurrentReview,
+  deleteReview,
   getReviews,
   postReview,
   setCurrentReview,
@@ -49,10 +50,18 @@ const Reviews = ({ id }) => {
     dispatch(postReview({ id, data: currentReview }));
     dispatch(clearCurrentReview());
   };
+  const onDelete = (reviewId ) => {
+    dispatch(deleteReview({ id: reviewId, cafeId: id }));
+  };
   return (
     <div className={classes.inner}>
       {reviews.map((review) => (
-        <ReviewItem key={review._id} review={review} />
+        <ReviewItem
+          key={review._id}
+          review={review}
+          user={user}
+          onDelete={() => onDelete(review._id)}
+        />
       ))}
       {user?.token && (
         <ReviewForm

@@ -18,6 +18,7 @@ const Photo = new Schema({
     required: true,
   },
 });
+ 
 Photo.post("findOneAndDelete", async function (doc, next) {
   doc.image &&
     (await fs.unlink(
@@ -31,6 +32,7 @@ Photo.post("findOneAndDelete", async function (doc, next) {
     });
   next();
 });
+ 
 Photo.pre("deleteMany", async function (doc, next) {
   doc.image &&
     (await fs.unlink(
@@ -38,6 +40,7 @@ Photo.pre("deleteMany", async function (doc, next) {
     ));
   next();
 });
+
 Photo.pre("save", async function (next, option) {
   await mongoose
     .model("CafeModel")

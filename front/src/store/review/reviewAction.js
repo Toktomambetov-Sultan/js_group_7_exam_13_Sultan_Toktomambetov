@@ -61,3 +61,23 @@ export const postReview = ({ id, data }) => {
     }
   };
 };
+
+export const deleteReview = ({ id, cafeId }) => {
+  return async (dispatch) => {
+    dispatch(fetchError);
+    try {
+      await axiosOrder.delete(`/reviews/${id}`);
+      const response = await axiosOrder.get(
+        `/reviews/${cafeId}`
+      );
+      dispatch(setReviews(response.data));
+      const cafeResponse = await axiosOrder.get(
+        `/cafe/${cafeId}`
+      );
+      dispatch(setCurrentCafe(cafeResponse.data));
+      dispatch(fetchSuccess());
+    } catch (e) {
+      dispatch(fetchError(e.response.data.errors));
+    }
+  };
+};
